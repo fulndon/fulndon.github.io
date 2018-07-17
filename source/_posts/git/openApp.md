@@ -10,7 +10,7 @@ categories: git
 通过git bash命令行，打开应用如小书匠
 <!--more-->
 # 应用打开配置
-1，自定义命令**md**.  在git安装目录下的`Git\mingw64\bin`文件夹中新建md文件（<span style="color:red">无后缀名</span>）内容如下：
+1，自定义命令**md**.  在任意目录下新建md文件（<span style="color:red">无后缀名</span>），并将其加到系统变量。内容如下：
 ```bash?linenums
 #!/bin/sh
 "D:\Program Files (x86)\Story\nw.exe" $1 &
