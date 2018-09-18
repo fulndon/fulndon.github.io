@@ -82,7 +82,11 @@ cheers:
   excellent: 太棒了
 
 keep_on: 继续努力。
-
+busuanzi:
+  user: 访客数
+  user_unit: 次
+  click: 点击量
+  click_unit: 量
 symbol:
   comma: '， '
   period: '。 '
