@@ -10,4 +10,4 @@ tags:
 [开发规范手册](/pdfjs/self/web/viewer.html "title")
 ```
 <a target="_blank" href="/self/pdfjs/web/viewer.html">开发规范手册（github）</a>
-<a target="_blank" href="http://ohbudtted.bkt.clouddn.com/artCode.pdf">开发规范手册（七牛云）</a>
+<a target="_blank" href="http://fulndon.gitee.io/hexo/file/artCode.pdf">开发规范手册（码云）</a>
