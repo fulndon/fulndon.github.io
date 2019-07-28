@@ -60,7 +60,7 @@ time_format: HH:mm:ss
 per_page: 5
 pagination_dir: page
 
-# Extensions
+# Extensions  https://gitee.com/fulndon/Hexo.git
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: 3-hexo
@@ -68,8 +68,9 @@ theme: 3-hexo
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy: 
-  type: git
-  repo: git@github.com:fulndon/fulndon.github.io.git
-  branch: master
-  name: fulndon
-  email: 1021131482@qq.com
+   type: git
+   repo: git@github.com:fulndon/fulndon.github.io.git
+   branch: master
+   name: fulndon
+   email: 1021131482@qq.com
+
