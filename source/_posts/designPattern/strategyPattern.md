@@ -1,6 +1,8 @@
 ---
 title: strategyPattern
-categories: designPattern
+categories: 
+- 编程的艺术
+- designPattern
 domainimg: ohbudtted.bkt.clouddn.com
 lang: designPattern
 date: 2018-05-14 07:46:42

@@ -1,8 +1,10 @@
 ---
 title: Template
-categories: designPattern
+categories: 
+- 编程的艺术
+- designPattern
 domainimg: ohbudtted.bkt.clouddn.com
-lang: design
+lang: designPattern
 date: 2018-01-14 10:05:42
 tags: designPattern
 ---

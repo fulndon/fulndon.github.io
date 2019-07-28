@@ -1,8 +1,10 @@
 ---
 title: principle
-categories: designPattern
+categories: 
+- 编程的艺术
+- designPattern
 domainimg: ohbudtted.bkt.clouddn.com
-lang: design
+lang: designPattern
 date: 2018-01-02 21:30:27
 tags:
 ---

@@ -1,7 +1,9 @@
 ---
 title: prototypePattern
 tags: designPattern
-categories: designPattern
+categories: 
+- 编程的艺术
+- designPattern
 domainimg: ohbudtted.bkt.clouddn.com
 lang: designPattern
 date: 2018-05-06 11:20:52

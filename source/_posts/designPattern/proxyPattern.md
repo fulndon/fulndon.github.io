@@ -1,6 +1,8 @@
 ---
 title: proxyPattern
-categories: designPattern
+categories: 
+- 编程的艺术
+- designPattern
 domainimg: ohbudtted.bkt.clouddn.com
 lang: designPattern
 date: 2018-05-05 17:39:06

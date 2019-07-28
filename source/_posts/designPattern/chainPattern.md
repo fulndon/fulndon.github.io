@@ -1,6 +1,8 @@
 ---
 title: chainPattern
-categories: designPattern
+categories: 
+- 编程的艺术
+- designPattern
 domainimg: ohbudtted.bkt.clouddn.com
 lang: designPattern
 date: 2018-05-09 22:43:45
