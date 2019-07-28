@@ -71,4 +71,5 @@ deploy:
   type: git
   repo: git@github.com:fulndon/fulndon.github.io.git
   branch: master
-
+  name: fulndon
+  email: 1021131482@qq.com

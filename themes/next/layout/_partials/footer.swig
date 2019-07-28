@@ -8,15 +8,7 @@
   <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
 </div>
 
-{% if theme.copyright %}
-<div class="powered-by">
-  {{ __('footer.powered', '<a class="theme-link" href="https://hexo.io">Hexo</a>') }}
-</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv"> {{ __('busuanzi.click')}} <span id="busuanzi_value_site_pv"></span>{{ __('busuanzi.click_unit')}}</span> | 
+<span id="busuanzi_container_site_pv"> {{ __('busuanzi.user')}} <span id="busuanzi_value_site_uv"></span>{{ __('busuanzi.user_unit')}}</span>
 
-<div class="theme-info">
-  {{ __('footer.theme') }} -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.{{ theme.scheme }}
-  </a>
-</div>
-{% endif %}
