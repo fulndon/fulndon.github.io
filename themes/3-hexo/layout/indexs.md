@@ -18,8 +18,11 @@ shift+G/g	到最下端
 ```
 * <a target="_blank" href="https://yelog.org/2017/03/23/3-hexo-instruction/">主题说明</a>
 * 如何在模块中读取站点或主题配置文件https://hexo.io/docs/variables  
+```
+eg:
 主题config文件<%= theme.toc.open %>  
 站点config文件<%= config.title %>
+```
 
 ## 文章置顶 
 * node_modules/hexo-generator-index/lib/generator.js
