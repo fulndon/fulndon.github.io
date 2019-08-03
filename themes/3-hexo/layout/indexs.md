@@ -8,7 +8,10 @@
 
 ## 关于博客主题
 
-话不多少，请看<a target="_blank" href="http://yelog.org/">这里</a>
+话不多说，请看<a target="_blank" href="http://yelog.org/">这里</a>
+如何在模块中读取站点或主题配置文件https://hexo.io/docs/variables  
+主题config文件<%= theme.toc.open %>  
+站点config文件<%= config.title %>
 
 ## 文章置顶 
 * node_modules/hexo-generator-index/lib/generator.js
