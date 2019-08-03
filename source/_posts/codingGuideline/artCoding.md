@@ -7,7 +7,7 @@ domainimg: ohbudtted.bkt.clouddn.com
 lang: codingGuideline
 date: 2018-05-12 08:45:24
 top: 1
-tags:
+tags: design
 ---
 ```
 [开发规范手册](/pdfjs/self/web/viewer.html "title")
