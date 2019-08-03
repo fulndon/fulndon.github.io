@@ -7,9 +7,17 @@
 >3、安静的环境，私人的空间。
 
 ## 关于博客主题
-
-话不多说，请看<a target="_blank" href="http://yelog.org/">这里</a>
-如何在模块中读取站点或主题配置文件https://hexo.io/docs/variables  
+* 博客中的<a target="_blank" href="https://yelog.org/2017/03/24/3-hexo-shortcuts/">快捷键</a>
+```
+s/S	全屏/取消全屏
+w/W	打开/关闭文章目录
+j/J	向下滑动
+k/K	向上滑动
+gg/GG	到最顶端
+shift+G/g	到最下端
+```
+* <a target="_blank" href="https://yelog.org/2017/03/23/3-hexo-instruction/">主题说明</a>
+* 如何在模块中读取站点或主题配置文件https://hexo.io/docs/variables  
 主题config文件<%= theme.toc.open %>  
 站点config文件<%= config.title %>
 
