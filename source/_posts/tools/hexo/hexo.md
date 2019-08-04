@@ -1,7 +1,7 @@
 ---
 title: hexo config
 lang: hexo
-categories: hexo
+categories: [工具,hexo]
 date: 2017-05-06 18:01:03
 tags: hexo
 ---

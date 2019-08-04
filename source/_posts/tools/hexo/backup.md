@@ -4,7 +4,7 @@ domainimg: ohbudtted.bkt.clouddn.com
 lang: hexo
 date: 2017-05-07 15:43:20
 tags:
-categories: hexo
+categories: [工具,hexo]
 ---
 
 # 博客备份至github分支

@@ -1,6 +1,6 @@
 ---
 title: romance
-categories: plugins
+categories: [工具,hexo]
 domainimg: ohbudtted.bkt.clouddn.com
 lang: hexo
 date: 2018-07-17 17:08:50

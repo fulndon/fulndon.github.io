@@ -1,12 +1,12 @@
 ---
-title: 图片展示相关
+title: 图片展示相关-七牛云
 lang: hexo
 date: 2017-05-07 14:00:25
 tags:
       - hexo
       - git
       - qhell
-categories: hexo
+categories: [工具,hexo]
 
 ---
 # 概术
