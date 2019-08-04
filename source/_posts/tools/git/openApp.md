@@ -1,10 +1,9 @@
 ---
 title: openApp
-domainimg: ohbudtted.bkt.clouddn.com
 lang: git
 date: 2017-05-07 18:45:06
 tags: [git,bash环境变量]
-categories: git
+categories: [工具,git]
 ---
 # 概术
 通过git bash命令行，打开应用如小书匠
