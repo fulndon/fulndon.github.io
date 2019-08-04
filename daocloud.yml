@@ -39,5 +39,5 @@ stages:
     branches:
     - hexo
   build_dir: /
-  cache: true
+  cache: false
   dockerfile_path: /Dockerfile
