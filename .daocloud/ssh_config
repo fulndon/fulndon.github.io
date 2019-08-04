@@ -1,0 +1,6 @@
+Host fulndon.github.com
+HostName github.com
+User fulndon
+IdentityFile ~/.ssh/id_rsa
+IdentitiesOnly true
+PreferredAuthentications true
