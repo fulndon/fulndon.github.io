@@ -2,19 +2,9 @@ version: 3
 image: CentOs:7.1.1503
 stages:
 - build
-- test
-构建任务:
-  stage: build
-  job_type: image_build
-  only:
-    branches:
-    - hexo
-  build_dir: /
-  cache: true
-  dockerfile_path: /Dockerfile
+- deploy
 布署任务:
-  stage: test
-  job_type: test
+  stage: deploy
   only:
     branches:
     - hexo
@@ -42,3 +32,12 @@ stages:
   - hexo g
   - hexo d
   - rm -rf ~/.ssh/
+构建任务:
+  stage: build
+  job_type: image_build
+  only:
+    branches:
+    - hexo
+  build_dir: /
+  cache: true
+  dockerfile_path: /Dockerfile
