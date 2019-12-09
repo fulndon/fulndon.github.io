@@ -4,7 +4,10 @@ domainimg: ohbudtted.bkt.clouddn.com
 lang: ELK
 date: 2018-08-06 09:39:30
 tags:
-categories: ELK
+categories: 
+ - 数据
+ - ELK
+ - notices
 ---
 # 安装
 ## 将下载好的文件由windows上传至linux

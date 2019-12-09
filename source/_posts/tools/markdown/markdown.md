@@ -1,6 +1,8 @@
 ---
 title: markdown
-categories: markdown
+categories: 
+ - 工具
+ - markdown
 domainimg: ohbudtted.bkt.clouddn.com
 lang: markdown
 date: 2017-12-14 07:40:05
