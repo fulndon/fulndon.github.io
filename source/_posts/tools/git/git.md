@@ -39,13 +39,14 @@ $ git config --global user.email johndoe@example.com
 ```
 $ git config --global core.editor emacs
 ```
-## 常用命令
+## 比较内容差异
 暂存前，看看文件改动了什么，可以使用git diff 命令
 git diff --cached 查看已经暂存起来的变化
 git log -p -2  -p，用来显示每次提交的内容差异。 你也可以加上 -2 来仅显示最近两次提交
 git log --pretty=oneline  
 git log --pretty=format:"%h - %an, %ar : %s"
-```
+
+ ```
 Administrator@fulndon MINGW64 /h/blog/hexo (hexo)
 $ git log --pretty=oneline
 d0f7caea2373e7ee2dcf592a39dbcaee7b2cf86c git 自定义命令
@@ -56,5 +57,15 @@ $ git log --pretty=format:"%h - %an, %ar : %s"
 d0f7cae - fulndon, 7 days ago : git 自定义命令
 10299cb - fulndon, 7 days ago : love page
 
+ ```
+## git打标签
+用来表示某次提交有特定的含义
 ```
-
+git push origin <tag name>  // 推送一个标签到远程
+git push origin hexo --tags //推送所有未推送的标签
+git tag -a deploy_v1 4e9fcd4f6f -m '创建标签 -a后跟的是标签名 logid'//某一个提交加标签
+git tag <name>//就可以打一个新标签
+git tag //展示标签
+git tag -d <tag name> // 删除一个标签
+git push origin :refs/tags/<tag name>   // 本地tag删除了，在执行该句，删除远程tag
+```
