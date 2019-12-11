@@ -1,7 +1,7 @@
 ---
-title: mapping注意点
+title: mapping-notices
 domainimg: ohbudtted.bkt.clouddn.com
-lang: data-process/elk/notes
+lang: data-process/elk/notices
 date: 2019-12-06 18:00:49
 tags:
 categories:
