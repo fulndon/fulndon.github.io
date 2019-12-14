@@ -38,6 +38,8 @@ git 是一个分布式管理控制系统，多人完成项目时，每个人的�
 $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 ```
+### Git配置多ssh密钥
+[这里](https://www.cnblogs.com/loveBBZ/p/10255747.html)
 ### 设置文本编辑器emacs
 ```
 $ git config --global core.editor emacs
