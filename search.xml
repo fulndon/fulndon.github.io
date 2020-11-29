@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[分支管理]]></title>
+    <url>%2F2019%2F12%2F14%2Fgit%2Fbranch-git%2F</url>
+    <content type="text"><![CDATA[查看本地分支，当前所在分支以 * 标出$ git branch 查看所有分支$ git branch -avv 基于当前分支创建一个新分支$ git branch 基于存在的分支创建一个新分支$ git branch 基于远程分支创建一个新分支git branch origin/master 基于提交创建一个新分支$ git branch 基于标签创建一个新分支$ git branch 删除分支$ git branch -d {dev} #切换分支$ git checkout 合并分支$ git merge 解决冲突，如果因冲突导致自动合并失败，此时 status 为mergeing 状态.需要手动修改后重新提交（commit） 列出已经存在的远程仓库$ git remote 列出远程仓库的详细信息，在别名后面列出URL地址$ git remote -v #添加远程仓库地址$ git remote add origin http:xxx.xxx 删除指定名称的远程仓库origin$ git remote remove origin 把本地仓库的提交推送到远程仓库#上传新分支至远程$ git push –set-upstream origin master$ git push -u origin master 将本地分支与远程建立关联$ git branch –track –set-upstream-to=origin/test test]]></content>
+      <categories>
+        <category>工具</category>
+        <category>git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[git存储原理]]></title>
+    <url>%2F2019%2F12%2F14%2Fgit%2Fstore-git%2F</url>
+    <content type="text"><![CDATA[存储对象tree对象：存储文件所在目录blob对象：压缩后的文件commit对象：提交对象引用对象：指向本地库或远程库的提交位置 示例以一次提交为例：bfd1ec C:\doc\blog\fulndon&gt;git log --pretty=oneline bfd1ec35db475edb361743fece84b7b0e4efc31f (HEAD -&gt; hexo, origin/hexo, origin/HEAD) cluster recovery 52b2d92266e4bc94565682417d30739ea5b49684 client-notices 查看提交对象:含有tree对象引用、parent引用、作者、提交人、注释如下 C:\doc\blog\fulndon&gt;git cat-file -p bfd1ec tree 2e67f1644e184e65df42f00ca68847f53c99b2a6 parent 52b2d92266e4bc94565682417d30739ea5b49684 author fulndon &lt;fulndon@qq.com&gt; 1576132944 +0800 committer fulndon &lt;fulndon@qq.com&gt; 1576132944 +0800 cluster recovery 查看树对象内容 2e67f1:上述tree对应的引用uuid C:\doc\blog\fulndon&gt;git cat-file -p 2e67f1 040000 tree 37e9609095ea8b1a1339b147d5732156beae9c4f .daocloud 100644 blob a9e09fdaddcae298858ae25e9e2f915f0f8303fc .gitignore 100644 blob 47a5c8b3751409c82122aa567f39cdf2fe031e41 Dockerfile 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 README.md 100644 blob 029eeb705954841638572f0e869f21e3385b9137 _config.yml 100644 blob 8c47a6e894b59e0a01dcef5c9a93d7b2e9439ea2 daocloud.yml 100644 blob 6465546d831f53613d37ba7e2dc3815a8810428e img.conf 100644 blob 44c911c3bf89621f28236c3501f062e5b5c08236 imgup.conf 100644 blob e4811dcac52d52872d5a3a8ac3b613932cace95b package-lock.json 100644 blob 62dd441b5b598093b6d9309919e2368d3ce4d469 package.json 040000 tree ab96d614edf38221ad065be7acc728c913af84fb scaffolds 040000 tree 882a1c5be44a428cfa102b4c511e73c7e49497d6 source 040000 tree c06aa936d1e5a0ac11c2d33acc761c9d2c26dffb themes 查看文件内容：47a5c blob对象【Dockerfile文件】 C:\doc\blog\fulndon&gt;git cat-file -p 47a5c # Dockerfile FROM node:latest MAINTAINER fulndon &lt;fulndon@qq.com&gt; # 安装git、ssh等基本工具 RUN apt-get update &amp;&amp; apt-get install -y git ssh-client ca-certificates --no-install-recommends &amp;&amp; rm -r /var/lib/apt/lists/* 补充UUID的生成以上一节Dockerfile文件为例，commit操作对文件内容进行hash生成文件内容变后，UUID才会变。Dockerfile-bak和Dockerfile文件只有名称不一样 如下 C:\doc\blog\fulndon&gt;git hash-object -w Dockerfile 47a5c8b3751409c82122aa567f39cdf2fe031e41 C:\doc\blog\fulndon&gt;git hash-object -w Dockerfile-bak 47a5c8b3751409c82122aa567f39cdf2fe031e41 //看新的提交增加了bak文件 18364b3b7a4 C:\doc\blog\fulndon&gt;git log commit 18364b3b7a4115b7fb634d6c6e19b9f53309cea5 (HEAD -&gt; hexo) Author: fulndon &lt;fulndon@qq.com&gt; Date: Sat Dec 14 14:38:24 2019 +0800 //含有上一次提交的引用 C:\doc\blog\fulndon&gt;git cat-file -p 18364b3b7a4 tree 0af02225885b9870ce428f8ecee12d58bd2e2ee8 parent bfd1ec35db475edb361743fece84b7b0e4efc31f author fulndon &lt;fulndon@qq.com&gt; 1576305504 +0800 committer fulndon &lt;fulndon@qq.com&gt; 1576305504 +0800 uuid hash-object //会发现此次提交的内容多了一个相同的uuid C:\doc\blog\fulndon&gt;git cat-file -p 0af022258 040000 tree 37e9609095ea8b1a1339b147d5732156beae9c4f .daocloud 100644 blob a9e09fdaddcae298858ae25e9e2f915f0f8303fc .gitignore 100644 blob 47a5c8b3751409c82122aa567f39cdf2fe031e41 Dockerfile 100644 blob 47a5c8b3751409c82122aa567f39cdf2fe031e41 Dockerfile-bak//这里，其他文件和目录因为内容没有变所有uuid不变 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 README.md 100644 blob 029eeb705954841638572f0e869f21e3385b9137 _config.yml 100644 blob 8c47a6e894b59e0a01dcef5c9a93d7b2e9439ea2 daocloud.yml 100644 blob 6465546d831f53613d37ba7e2dc3815a8810428e img.conf 100644 blob 44c911c3bf89621f28236c3501f062e5b5c08236 imgup.conf 100644 blob e4811dcac52d52872d5a3a8ac3b613932cace95b package-lock.json 100644 blob 62dd441b5b598093b6d9309919e2368d3ce4d469 package.json 040000 tree ab96d614edf38221ad065be7acc728c913af84fb scaffolds 040000 tree b010d532787a06c91b8fc8ea56b17fd7bbb96dad source 040000 tree c06aa936d1e5a0ac11c2d33acc761c9d2c26dffb themes .git 文件夹详见这里 ├─hooks ├─info ├─logs //提交日志信息 │ └─refs │ ├─heads │ └─remotes │ └─origin ├─objects //存储对象 │ ├─02 //blob对象的前两位 │ ├─0a │ ├─info │ └─pack └─refs //本地提交、远程提交、标签提交最新的uuid │ ├─heads │ ├─remotes │ │ └─origin │ └─tags │ ├──index //暂存区索引库：含有object库中的所有对象、tree对象 执行add命令时此文件更新了]]></content>
+      <categories>
+        <category>工具</category>
+        <category>git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[cluster-notices]]></title>
+    <url>%2F2019%2F12%2F12%2Felk%2Fnotices%2Fcluster-notices%2F</url>
+    <content type="text"><![CDATA[节点闪退调整分片自动分配及关闭负载均衡，详情如下 PUT _cluster/settings { &quot;persistent&quot;: { &quot;cluster&quot;: { &quot;routing&quot;: { &quot;rebalance&quot;: { &quot;enable&quot;: &quot;none&quot; }, &quot;allocation&quot;: { &quot;node_concurrent_recoveries&quot;: &quot;1&quot;,//默认是2，1个节点只允许一个出(恢复在其他节点)一个进 &quot;enable&quot;: &quot;new_primaries&quot; //kibana每天都会生成新的索引 } } } } } //恢复副本 PUT _cluster/settings { &quot;persistent&quot;: { &quot;cluster&quot;: { &quot;routing&quot;: { &quot;allocation&quot;: { &quot;enable&quot;: null } } } } } //在分片开始恢复时关掉---即监控的Overview界面出现副本恢复的进度时 PUT _cluster/settings { &quot;persistent&quot;: { &quot;cluster&quot;: { &quot;routing&quot;: { &quot;allocation&quot;: { &quot;enable&quot;: &quot;new_primaries&quot; //kibana每天都会生成新的索引 } } } } } 主分片不分配需要找到主分片在未脱离集群时所在节点后执行以下命令详情参见这里 POST _cluster/reroute { &quot;commands&quot;: [ { &quot;allocate_stale_primary&quot;: { &quot;index&quot;: &quot;s2-********201908&quot;, &quot;shard&quot;: 0, &quot;node&quot;: &quot;es3&quot;, &quot;accept_data_loss&quot;: true } } ] }]]></content>
+      <categories>
+        <category>数据</category>
+        <category>ELK</category>
+        <category>notices</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[client-notices]]></title>
+    <url>%2F2019%2F12%2F10%2Felk%2Fnotices%2Fclient-notices%2F</url>
+    <content type="text"><![CDATA[减少请求频率请求频烦时，考虑使用bulk请求，减少交互次数 减少索引频率考虑在更新es前进行预处理：将针对同一条记录进行操作的多条请求进行合并因为es中，即使是文档中的一个字段进行了更新，该文档也会重新索引方案一、：hbase中汇总数据–hbase协处理器监控某一行记录更新组织报文并同步到kafka—es增量更新方案二、：表数据–kafka–合并文档并更新至es 合理利用连接资源避免重复创建连接，考虑使用连接池 请求集群节点一个client 实例连接到了[a,b,c]三个节点，第一次请求a节点，第二次请求b节点RestHighLevelClient类的performRequestAsyncNoCatch方法体内最后一行 this.performRequestAsync(startTime, this.nextNode(),。。。。入参nextNode()调整了RestClient.NodeTuple&lt;Iterator&gt;中节点的位置，关键方法如下 nextNode()-&gt;selectNodes-&gt;Collections.rotate(list,int distance)//节点移动]]></content>
+      <categories>
+        <category>数据</category>
+        <category>ELK</category>
+        <category>notices</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[mapping-notices]]></title>
+    <url>%2F2019%2F12%2F06%2Felk%2Fnotices%2Fmapping-notices%2F</url>
+    <content type="text"><![CDATA[分片数设置 分片数分裂分裂时可以先将副本书调为0(可以加快索引速度)，分配完后，再改回来 //创建索引时指定 PUT my_source_index { &quot;settings&quot;: { &quot;index.number_of_shards&quot; : 1, &quot;index.number_of_routing_shards&quot; : 200 //总分片数max } } //扩展分片时执行 PUT /my_source_index/_settings { &quot;settings&quot;: { &quot;index.blocks.write&quot;: true } } POST my_source_index/_split/my_target_index { &quot;settings&quot;: { &quot;index.number_of_shards&quot;: 2 //本次扩展后的分片数 } } 分片数大小建议建议20G-40G 字段类型设置尽量使用宽表查询nested嵌套查询慢几倍、父子查询慢成百上千倍 如果关系型结构的子表中查询条件只涉及到单个属性，即子表的一个属性满足就返回，可以用数组 自定义map将多个可搜索字段合并成一个字段：搜索的字段越少，速度越快]]></content>
+      <categories>
+        <category>数据</category>
+        <category>ELK</category>
+        <category>notices</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[hbase初识]]></title>
+    <url>%2F2019%2F08%2F10%2Fhbase%2Fhbase-init%2F</url>
+    <content type="text"><![CDATA[hbase是什么bsae 是hadoop database，一个分布式的，高容量、可扩展的，面向列的nosql大数据存储数据库。 可靠性：提供wal和replication机制，前者保证写入时数据不会丢失，后者即为副本，集群异常时，数据扔可用 面向列：一行中的数据，如果某一行为null，不会占用存诸空间 扩展性：在不停止现有服务的前提下，可以随时添加或减少节点 高容量：单表可以有百亿行，百万列 #核心功能模块客户端client、协调服务模块ZooKeeper、主节点Hmaster、Region节点RegionServer 客户端使用hbase的RPC机制与Hmaster(管理类)和HRegionServer(数据读写类)进行通信 zookeeper 保证集群中只有一个活跃的Hmaster节点 存储所有的region的寻址入口 实时监控regionServer,并将其状态通知给hmaster 存储hbase元数据信息 master 表和region的管理工作 regionServer负责用户的IO请求，向HDFS文件系统中读写数据 它管理了一系列的HRegion,对应了table中的一个region。 HRegion由多个HStore组成，一个HStore对应了表中的一个列簇 HStore由两部分组成，MemStore StoreFile MemStore是Stored Memory Buffer ,用户写数时，会先将数据写入其中，满了后会flush形成一个StoreFile StoreFile文件数到阈值后会触发合并操作(多个合并成一个–进行更新和删除操作)–单个文件大小达到某一阈值触发当前region的split操作，生成两个子Region会初Hmaster分配到相应的regionServer上。HLog每个HRegionServer都有一个，每次用户写入MemStore中时也会写一份数据到这个文件中 定期滚动刷新-删除已持久化到StoreFile中的数据 HRegionServer意外终止后，HMaster通过zookeeper感知到 首先将HLog中不同region的数据拆分到相应的region目录下 然后将失效的region重新分配给HRegionServer,这些server加载region时会发现有历史的HLog处理，会将其中的数据放至MemStore,然的flush到storeFiles完成数据恢复。 数据模型hbase中的数据也是按表区分。表中的每一行由行键和列簇中的列组成，行键类似于id。表中的行是按照ROWKEY行键来排序的。 逻辑模型hbase表中的数据是三维的，x-列名，y-rowkey z-时间戳。即表中每一个单元格都有不同时间段的值默认展示最近的值 表中的每一行可以有不同的列，创建表时可以不用指定列的类型，即每一行所涉及的列可以不同 表中每一行的行键都是唯一的。 列名：列簇前缀:修饰符 物理模型一个列簇的数据会被同一个region管理，物理上存放在一起]]></content>
+      <categories>
+        <category>数据</category>
+        <category>hbase</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[自动化布署]]></title>
+    <url>%2F2019%2F08%2F04%2Fhexo%2Fdaocloud%2F</url>
+    <content type="text"><![CDATA[描述代码提交后触发daocloud上的流程：构建-布署 相关操作 生成密钥 ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot; 将公钥放置在对应的项目的Deploy keys中 在根目录下新建Dockerfile文件 在根目录下新建.daocloud文件夹,有以下内容 id_rsa known_hosts ssh_config daocloud操作 新建项目，关联对应的源代码，如xx.github.io，会生成镜像 在镜像仓库标签页设置对应镜像 设置页：勾选打包镜像存为latest标签，便于下面的布署任务执行 流程定义页：右下角点击在线编辑yml-替换成这里的内容daocloud.yml 点击构建任务复制镜像发布地址、设置触发条件 点击布署任务设制镜像地址、依赖条件 known_hosts你本地生成的文件就行C:\Users\MSI-PC.ssh说是通过ssh -T &#x67;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#109;这个命令生成的，（输入yes） ssh_configHost fulndon.github.com HostName github.com User fulndon IdentityFile ~/.ssh/id_rsa IdentitiesOnly true PreferredAuthentications true Dockerfile # Dockerfile FROM node:latest MAINTAINER fulndon &lt;fulndon@qq.com&gt; # 安装git、ssh等基本工具 RUN apt-get update &amp;&amp; apt-get install -y git ssh-client ca-certificates --no-install-recommends &amp;&amp; rm -r /var/lib/apt/lists/* # 设置时区，不知道为什么？ RUN echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata # 只安装Hexo命令行工具，其他依赖项根据项目package.json在持续集成过程中安装 RUN npm install hexo-cli -g --registry=https://registry.npm.taobao.org EXPOSE 4000 daocloud.yml注意修改xx version: 3 image: CentOs:7.1.1503 stages: - build - deploy 布署任务: stage: deploy only: branches: - xx你的分支 pull_request: false dependencies: - 构建任务 before_script: - mkdir ~/.ssh - mv .daocloud/id_rsa ~/.ssh/id_rsa - mv .daocloud/ssh_config ~/.ssh/config - mv .daocloud/known_hosts ~/.ssh/known_hosts - chmod 600 ~/.ssh/id_rsa - chmod 600 ~/.ssh/config - chmod 600 ~/.ssh/known_hosts - eval $(ssh-agent) - ssh-add ~/.ssh/id_rsa - rm -rf .daocloud - git config --global user.name &quot;xx&quot; - git config --global user.email &quot;xx@qq.com&quot; image: xxxxxxxxxx:latest 你自己的镜像 install: - npm install --registry=https://registry.npm.taobao.org script: - hexo clean - hexo g - hexo d - rm -rf ~/.ssh/ 构建任务: stage: build job_type: image_build only: branches: - hexo build_dir: / cache: false dockerfile_path: /Dockerfile]]></content>
+      <categories>
+        <category>工具</category>
+        <category>hexo</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[git常用命令]]></title>
+    <url>%2F2019%2F08%2F04%2Fgit%2Fcommands%2F</url>
+    <content type="text"><![CDATA[常用命令 git remote -v 查看仓库地址 git remote add xx &#x78;&#x78;&#120;&#64;&#120;&#120;&#46;&#103;&#x69;&#x74; 添加仓库地址 git config remote.xx.url &#120;&#x78;&#x40;&#x78;&#x78;&#46;&#x67;&#x69;&#x74; 配置仓库地址更改 Git reset –hard uuid 放弃本地更改，强制更新，如果已经提交使用soft git checkout 切换分支 git branch列出分支列表 查看文件的更改内容 已提交的文件git log 查看提交记录复制commit id git show commit id 查看对应文件的变更内容 未执行git add 命令git status 查看更改的文件 git diff 更改的文件 已执行 git add 命令git status 查看更改的文件 git diff --cached themes/3-hexo/_config.yml 某个文件或文件夹git不能识别git rm --cached folder git add folder]]></content>
+      <categories>
+        <category>工具</category>
+        <category>git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[exception_process]]></title>
+    <url>%2F2019%2F08%2F02%2Fexception-process%2F</url>
+    <content type="text"><![CDATA[1、捕获异常后，禁止直接 return 若是抛出，则不要重复打印日志信息 若是不抛出,打印出日志信息 无论是传递错误信息，还是日志打印，一定要带上堆栈信息，如 new ServiceException(‘xxxx’,e); 2、尽量捕获特定异常，即自定义异常一、运行时异常 代码无法处理，程序停止，即时throw掉，调用方不捕获也可以编译通过，如a方法只能处理int类型的数据，结果传进来一个汉字，就可以声明运行时异常。 二、检查异常 代码可以针对异常进行处理 3、不要在finally块中抛出异常finally块中抛出的异常会覆盖本方法中抛出的异常 public static void throwRuntimeException(){//运行时异常方法不用处理，即不抛出，不报错 try{ throw new RuntimeException(&quot;xx&quot;); }finally { throw new RuntimeException(&quot;finally_throwRuntimeException&quot;); } } public static void throwCheckedException(){//检查异常，需要程序去处理 try{ throw new CheckedException(&quot;xx&quot;); }catch (CheckedException e){ throw new CheckedException(&quot;CheckedException&quot;); }finally{ throw new RuntimeException(&quot;finally_throwCheckedException&quot;);//注释掉这块代码，catch块中checked异常会报错， } } 如下没有业务异常xx java.lang.RuntimeException: finally_throwCheckedException at org.pentaho.di.trans.steps.elasticsearchbulk.util.Constants.throwCheckedException(Constants.java:129) at org.pentaho.di.trans.steps.elasticsearchbulk.util.Constants.main(Constants.java:134) Exception in thread &quot;main&quot; java.lang.RuntimeException: finally_throwRuntimeException at org.pentaho.di.trans.steps.elasticsearchbulk.util.Constants.throwRuntimeException(Constants.java:120) at org.pentaho.di.trans.steps.elasticsearchbulk.util.Constants.main(Constants.java:138) 4、抛出异常时不要使用 e.printStackTrace();应带上有用的上下文信息，注释 5、尽早捕获异常，传递异常发生时的上下文信息6、捕获异常后注意对资源的清理7、不要使用异常来控制程序流程8、及早校验用户的输入]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>artCoding</category>
+      </categories>
+      <tags>
+        <tag>design</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[romance]]></title>
+    <url>%2F2018%2F07%2F17%2Fhexo%2Fromance%2F</url>
+    <content type="text"><![CDATA[骚一把love page]]></content>
+      <categories>
+        <category>工具</category>
+        <category>hexo</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[extends]]></title>
+    <url>%2F2018%2F05%2F15%2Fextends%2F</url>
+    <content type="text"><![CDATA[方法的执行父类声明的类只会执行，实例重现父类的方法，父类和基类拥有的方法。重写：方法名和参数名完全相同，反回结果与不大于父类视为重写，参数有继承关系也不是重写。方法同名，子类参数作用域小于父类（不美好的方法，抵制出现）会出现以假乱真，子类实例被父类声明后，调不到子类实例的方法，消失了例：药房拿药，大人吃2片，小孩吃1片，小孩替大人去拿药会拿到2片大人的药量允许出现的情况例：大人小孩玩小孩游戏，小孩可以和大人玩，也可以和小孩玩，大人只和小孩玩，子类参数大于父类参数重写：方法名和参数名完全相同视为重写，会执行子类方法。参数若有继承，也不算是重写，子类参数作用域缩小时只有子类句柄调用才可执行。重写的方法返回结果可以缩小，放大会报错（同名，同种参数) package basic.test; /** * Created by MSI-PC on 2018/5/14. */ class RootMan{ public void supper(){ System.out.println(&quot;super&quot;); } //和小孩玩游戏 public Child playChildGame(Child child){ System.out.println(&quot;super_game_child&quot;); return null; } //获取药量 public Parent getDrug(RootMan parent){ System.out.println(&quot;root_6片药&quot;); return null; } public RootMan talk(Parent parent){ System.out.println(&quot;parent_&quot;+this.getClass()); return null; } } abstract class Parent extends RootMan{ public Parent() { System.out.println(&quot;parent&quot;); } //@Override 报错 不是重写 public RootMan getDrug(Parent parent){ System.out.println(&quot;parent_4片药&quot;); return null; } @Override public Parent talk(Parent parent){ System.out.println(&quot;parent_&quot;+this.getClass()); return null; } public Child talkParaSmall(Child parent){ System.out.println(&quot;test_child&quot;+this.getClass()); return null; } } public class Child extends Parent { Child(){ System.out.println(&quot;child&quot;); } //@Override 不是重写加此标识会报错 只有自己类的句柄会调用 public RootMan getDrug(Child child){ System.out.println(&quot;test_child:1片药&quot;); return null; } //@Override public Parent talkParaSmall(RootMan parent){ System.out.println(&quot;test_child&quot;+this.getClass()); return null; } //对小孩来说，大人就是父母 不是重写 public RootMan playChildGame(Parent parent){ System.out.println(&quot;test_child&quot;); return null; } @Override//真正的重写 返回参数虽不同但也算是 返回结果不能扩大 public Child talk(Parent parent){ System.out.println(&quot;test_child&quot;+this.getClass()); return null; } public static void main(String[] args) { //子类实例 RootMan rootMan = new RootMan(); Parent parent = new Child(); Child child = new Child();//小参数 parent.getDrug(child);//要拿小孩的药量，经果拿到了大人的药量 parent.getDrug(parent); parent.playChildGame(child);//执行的方法从基类开始选择 // parent.playChildGame(parent); 报错 因为parent是子类特有的方法 child.talkParaSmall(child);//子类句柄调用 子类方法 parent.talk(parent);//假大人执行重写的子类方法 child.talk(parent);//子类方法 } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[strategyPattern]]></title>
+    <url>%2F2018%2F05%2F14%2FstrategyPattern%2F</url>
+    <content type="text"><![CDATA[策略模式定义了算法族，分别封装每个算法，让他们之间可以相互替换，相对于客户来说，其变化是透明的角色：包装类（放策略) 策略实例 策略抽像例子：加法还是减法 //策略抽像 public abstract class Calculator { public abstract int exec(int a,int b); public static void main(String[] args) { Container container = new Container(1); int result = container.exec(1,2); System.out.println(result); } } //两个策略 public class ADD extends Calculator { @Override public int exec(int a, int b) { return a+b; } } class SUB extends Calculator{ @Override public int exec(int a, int b) { return a-b; } } //策略容器 public class Container { private Calculator calculator; public Container(int calculatorType){ if(calculatorType == 0){ this.calculator = new SUB(); }else { this.calculator = new ADD(); } } public int exec(int a,int b){ return calculator.exec(a,b); } } 策略枚举public enum CalculatorContainer { ADD(&quot;+&quot;){//相当于SUB extends 当前枚举类 @Override public int exec(int a, int b) { return a+b; } }, SUB(&quot;-&quot;){//相当于SUB extends 当前枚举类 @Override public int exec(int a, int b) { return a-b; } }; String result = &quot;&quot;; private CalculatorContainer(String result){ // this.result = result; } public abstract int exec(int a,int b); public static void main(String[] args) { int c = CalculatorContainer.ADD.exec(1,2); System.out.println(c); } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[artCoding]]></title>
+    <url>%2F2018%2F05%2F12%2FartCoding%2F</url>
+    <content type="text"><![CDATA[[开发规范手册](/pdfjs/self/web/viewer.html &quot;title&quot;) 开发规范手册（github）开发规范手册（码云）]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>artCoding</category>
+      </categories>
+      <tags>
+        <tag>design</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[decoratorPattern]]></title>
+    <url>%2F2018%2F05%2F11%2FdecoratorPattern%2F</url>
+    <content type="text"><![CDATA[装饰模式动态地给一个对象添加一些额外的职责。和代类模式类似，装饰模式在于给原有方法添加功能，继承抽像，而代理模式，在于代理所有方法，实现抽像。给书皮做装饰，写姓名，包书皮 public class Client { public static void main(String[] args) { Book book = new MathBook();//拿到一本书 Decorator writeName = new TagBookDecorator(book);//写上自己的名字 Decorator clothesBook = new MathBookDecorator(writeName);//包上书皮 //此刻装饰的对象是tag装饰 这个读书方法属于书皮装饰的方法 clothesBook.readBook();//读书 先弄的书皮，再写的名字 } } 几个装饰public abstract class Decorator extends Book{ private Book book = null; public Decorator(Book book) { this.book = book; } @Override public void readBook() { this.book.readBook(); } } class TagBookDecorator extends Decorator{ private void selfTagPost(){ System.out.println(&quot;贴上自己的标签&quot;); } @Override public void readBook() { System.out.println(&quot;书的侧面写上自己的名字&quot;); super.readBook(); } public TagBookDecorator(Book book) { super(book); } } class MathBookDecorator extends Decorator{ private void bookClothes(){ System.out.println(&quot;给数学书包上书皮&quot;); } public MathBookDecorator(Book book) { super(book); } @Override public void readBook() { bookClothes();//包上书皮再读书 super.readBook(); } } 装饰对象public abstract class Book { public abstract void readBook(); } class MathBook extends Book{ @Override public void readBook() { System.out.println(&quot;读数学书&quot;); } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[chainPattern]]></title>
+    <url>%2F2018%2F05%2F09%2FchainPattern%2F</url>
+    <content type="text"><![CDATA[责任链模式所有处理者站在一条线上，处理自己能处理的东东含有指向下一个处理者的句柄体检者拿着体检单去各个科室体检 各个科室组成的责任链 及 用户体检public class ChainMain { //返回一个链的第一个元素 所有的处理者形成一个链 public static Handler getChainHandlerFirst(){ Handler handler = new EyeCheckHandler(); Handler handlerHeavy = new HeavyCheckHandler(); Handler handlerMouth = new MouthCheckHandler(); handler.setNextHanler(handlerHeavy); handlerHeavy.setNextHanler(handlerMouth); return handler; } public static void main(String[] args) { Handler handler = getChainHandlerFirst(); //用户请求 Request request = new Request(); request.setCheckMoudel(Constants.CHECK_TYPE);//体检的类别 请求内容决定了哪些handler可以处理 handler.handleReport(request);//开始处理请求 System.out.println(&quot;体检报告：&quot;+request.getCheckReport());//输出体检报告 } } public class Constants { public static String EYE_CHECK = &quot;,1,&quot;; public static String MOUTH_CHECK = &quot;,2,&quot;; public static String HEAVY_CHECK = &quot;,3,&quot;; //体检的类别 public static String CHECK_TYPE = EYE_CHECK+MOUTH_CHECK; } 请求各个处理者需要处理的内容和响应 public class Request { private String checkMoudel;//体检模式 private StringBuilder checkReport = new StringBuilder();//体检报告 public StringBuilder getCheckReport() { return checkReport; } public String getCheckMoudel() { return checkMoudel; } public void setCheckMoudel(String checkMoudel) { this.checkMoudel = checkMoudel; } } 处理者抽像自己能处理的级别 下一个处理者 处理业务逻辑自己的逻辑走完，将请求交给下一个处理者 public abstract class Handler { private Handler nextHanler;//需要继续将报告单传给下一个科室填写 protected abstract String checkHealth();//当前科室进行诊治 protected abstract String currentType();//当前科室是负责哪一块的 public final String handleReport(Request request){ StringBuilder report = request.getCheckReport(); String requestContent = request.getCheckMoudel(); if(requestContent.contains(currentType())){ report.append(checkHealth()).append(&quot;\n&quot;);//可以处理者可以处理该请求 } if(nextHanler != null){//将请求交给下一个处理者 nextHanler.handleReport(request); } return report.toString(); } public final void setNextHanler(Handler nextHanler){ this.nextHanler = nextHanler; } } 链上的所有处理者每个处理者都有一个标识，说明自己能否进行业务处理以及本职工作 public class EyeCheckHandler extends Handler { @Override protected String checkHealth() { System.out.println(&quot;视力检测中&quot;); return &quot;eye is not good &quot;; } @Override protected String currentType() { System.out.println(&quot;我是眼科的&quot;); return Constants.EYE_CHECK; } } class HeavyCheckHandler extends Handler{ @Override protected String checkHealth() { System.out.println(&quot;体重检测中&quot;); return &quot;heavy is better&quot;; } @Override protected String currentType() { System.out.println(&quot;我是测体重的&quot;); return Constants.HEAVY_CHECK; } } class MouthCheckHandler extends Handler{ @Override protected String checkHealth() { System.out.println(&quot;口腔检测中&quot;); return &quot;mouth is ok &quot;; } @Override protected String currentType() { System.out.println(&quot;我是测口腔的&quot;); return Constants.MOUTH_CHECK; } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[命令模式]]></title>
+    <url>%2F2018%2F05%2F07%2F%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[命令模式就是老板叫一个传话的(AssignCommand） 让他传递各种命令（Command），每个命令都有对应的执行人Receiver传话的，传话的目的是这个命令能否执行成功，不关注谁执行， public static void main(String[] args) { AssignCommand assignCommand = new AssignCommand();//调用者 Command command = new ConcreteCommand();//执行的命令(生成的同时，也生成了receiver) assignCommand.setCommand(command);//调用者拿到命令 assignCommand.assignCommand();//调用者执行命令（内部让receiver执行） } 调用者及客户端public class AssignCommand { private Command command;//收到的命令 public void assignCommand(){ command.execute(); } public void setCommand(Command command){ this.command = command; } } 执行的命令//命令必须要有执行者 public abstract class Command { protected final Receiver receiver; protected Command(Receiver receiver) { this.receiver = receiver; } public abstract void execute(); } class ConcreteCommand extends Command{ //具体命令指定接收者 protected ConcreteCommand() { super(new ConcreteReceiver()); System.out.println(&quot;准备好命令和接收人&quot;); } @Override public void execute() { super.receiver.doSomething(); } } 任务执行者public abstract class Receiver { public abstract void doSomething(); } //可能会有不同类型的任务 class ConcreteReceiver extends Receiver{ @Override public void doSomething() { System.out.println(&quot;执行者执行任务&quot;); } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[prototypePattern]]></title>
+    <url>%2F2018%2F05%2F06%2FprototypePattern%2F</url>
+    <content type="text"><![CDATA[原型模式原型模式就是使用对象的克隆的方法。clone()方法复制的是复杂对象的引用，包装类型的数据是复制的值 public class Prototype implements Cloneable{ private Integer ref = 3; private int i = 2; private ArrayList&lt;String&gt; str = new ArrayList&lt;String&gt;(); @Override protected Object clone() throws CloneNotSupportedException { Prototype o = (Prototype) super.clone(); o.str = (ArrayList&lt;String&gt;)this.str.clone(); return o; } public static void main(String[] args) { Prototype p = new Prototype(); p.str.add(&quot;1&quot;); try { Prototype t = (Prototype) p.clone(); t.ref = Integer.valueOf(2); t.str.add(&quot;clone&quot;); System.out.println(p.ref+p.str.toString()); System.out.println(t.ref); } catch (CloneNotSupportedException e) { e.printStackTrace(); } } 中介者模式中介公司就是中介者 还有个同事的角色当多个对象间有复杂的业务逻辑时，可将此逻辑交由中介处理 //抽像基类 通过get set方式注入多个同事 public abstract class Mediator { protected ConcreteColleague concreteColleague; protected ConcreteColleague concreteColleagueTwo; abstract void signAggremeng();//到店签合同 abstract void seeLicense();//看营业执照 } //处理业务逻辑 public class ConcreteMediator extends Mediator { @Override void signAggremeng() {//同事方法 super.concreteColleague.talk(); } void seeLicense(){ System.out.println(&quot;看营业执照&quot;); } } public abstract class Colleague { protected Mediator mediator;//同事必须有中介 public Colleague(Mediator mediator) { this.mediator = mediator; } } public class ConcreteColleague extends Colleague { public ConcreteColleague(Mediator mediator) { super(mediator); } //同事私有 public void talk(){ System.out.println(&quot;商讨&quot;); } //委拖中介处理 public void trust(){ mediator.seeLicense(); } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+      <tags>
+        <tag>designPattern</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[proxyPattern]]></title>
+    <url>%2F2018%2F05%2F05%2FproxyPattern%2F</url>
+    <content type="text"><![CDATA[代理模式也叫做委拖模式。代理类需要关联到实例对象，替其执行方法 动态代理动态代理是在运行阶段指定代理哪一个对象，使用了JDK提供动态代理接口InvocationHandler. Proxy.newProxyInstance方法会返回一个代理。角色：实例对象， 所有实例的包装 代理工具场景：代理买票 抽出要代理的业务逻辑：要买的火车号 票数 拿票 public class Client { public static void main(String[] args) { TicketBuyerBuyer bean = new TicketBuyerBuyer(&quot;张三&quot;);//实例 InvocationHandler invocation = new TicketBuyIH(bean);//wrapper Class&lt;?&gt; cls = bean.getClass(); // 生成代理实例---1 代理目标的类加载器 代理目标的业务动作 代理类要实现的功能 TicketBuyerService ticketBuyerProxy = (TicketBuyerService) Proxy.newProxyInstance(cls.getClassLoader(),cls.getInterfaces(), invocation); ticketBuyerProxy.setCarIndex(&quot;1&quot;);//哪俩火车 ticketBuyerProxy.setCount(2);//几张票 ticketBuyerProxy.getCar();//获得火车票 } } public class TicketBuyIH implements InvocationHandler{ //被代理的对象 private Object target; public TicketBuyIH(Object target) { this.target = target; } @Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable { //proxy 为每一个target生成的代理对象 Object result = method.invoke(target,args); if(method.getName().equalsIgnoreCase(&quot;getCar&quot;)){ System.out.println(&quot;买到票了&quot;); } return result; } } public class TicketBuyerBuyer implements TicketBuyerService,Serializable { private String carIndex; private Integer count; public TicketBuyerBuyer(String name) { System.out.println(name+&quot;使用了代理&quot;); } @Override public void getCar() { System.out.println(carIndex+&quot;号车: &quot;+count+&quot;票&quot;); } public void setCarIndex(String carIndex) { this.carIndex = carIndex; } public void setCount(Integer count) { this.count = count; } public String getCarIndex() { return carIndex; } public Integer getCount() { return count; } } 动态代理扩展动态代理与业务逻辑结合。为便于以后第三方jar包的升级，新建DynamicProxy类，业务动态子类继承此类 TicketBuyer bean = new TicketBuyer(&quot;张三&quot;); TicketBuyerService ticketBuyerProxy = BuyTicketDynamicProxy.newProxyInstance(bean); ticketBuyerProxy.setCarIndex(&quot;1&quot;);//哪俩火车 ticketBuyerProxy.setCount(2);//几张票 ticketBuyerProxy.getCar();//获得火车票 public class BuyTicketDynamicProxy extends DynamicProxy { public static &lt;T&gt; T newProxyInstance(TicketBuyer ticketBuyer){ InvocationHandler invocation = new TicketBuyIH(ticketBuyer); Class&lt;?&gt; cls = ticketBuyer.getClass(); return newProxyInstance(cls.getClassLoader(),cls.getInterfaces(),invocation); } } public class DynamicProxy { public static &lt;T&gt; T newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h){ System.out.println(&quot;动态即将代理执行&quot;); return (T) Proxy.newProxyInstance(loader,interfaces,h); } } 强制代理只能通过代理访问 TicketBuyer bean = new TicketBuyer(&quot;张三&quot;); TicketBuyerService myProxy = bean.getMyProxy(); myProxy.getCar(); public class TicketBuyer implements TicketBuyerService,Serializable { private String carIndex; private Integer count; private boolean forceProxy = true; private TicketBuyerService myProxy; public boolean forceProxyRun(){ boolean execute = false;//是否执行其方法 if(forceProxy &amp;&amp; myProxy == null){ System.out.println(&quot;请用代理访问&quot;); }else if(forceProxy){ System.out.println(&quot;走的强制代理逻辑&quot;); execute = true; }else{ System.out.println(&quot;走的普通代理逻辑&quot;); execute = true; } return execute; } @Override public void getCar() { if(forceProxyRun()){ System.out.println(carIndex+&quot;号车: &quot;+count+&quot;票&quot;); } } } public class BuyTicketProxy implements TicketBuyerService { //要代理的实例对象 private TicketBuyerService ticketBuyer; public BuyTicketProxy(TicketBuyerService ticketBuyer) { this.ticketBuyer = ticketBuyer; } @Override public void getCar() { ticketBuyer.getCar(); } @Override public void setCount(Integer count) { ticketBuyer.setCount(count); } @Override public void setCarIndex(String carIndex) { ticketBuyer.setCarIndex(carIndex); } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+      <tags>
+        <tag>designPattern</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[builderPattern]]></title>
+    <url>%2F2018%2F04%2F11%2FbuilderPattern%2F</url>
+    <content type="text"><![CDATA[设计模式之11 建造者模式就是有一个指导者，去创建不同的表示，就像积木可以被摆放成各种形状，摆放的过程叫创建，思想叫建造者。像导演用各种情节出现顺序制造电影 public class Director { private List&lt;String &gt; sequence = new ArrayList&lt;String&gt;(); private MoveKFBuilder moveKFBuilder = new MoveKFBuilder(); public MoveKF getMoveKF(){ sequence.clear(); ///练功，打架 练功 打架 奇遇 无敌手 //将这些剧情放进sequence中 sequence.add(&quot;1&quot;); sequence.add(&quot;2&quot;); moveKFBuilder.setSequence(sequence); return (MoveKF)moveKFBuilder.getMove(); } //恐布片，鬼杀人， 灵异事件 public static void main(String[] args) { Director director = new Director(); Move move = director.getMoveKF(); move.playMove(); } } //电影抽像 public abstract class Move { private List&lt;String&gt; sequence = new ArrayList&lt;String&gt;(); //电影中的各种剧情 protected abstract void insertPreStory();//前言 protected abstract void insertKillPeople();//杀人 protected abstract void funStory(); protected abstract void fightEveryOne(); final public void playMove(){ for (int i = 0; i &lt; sequence.size(); i++) { String value = sequence.get(i); if(&quot;1&quot;.equals(value)){ insertPreStory(); }else if(&quot;2&quot;.equals(value)){ insertKillPeople(); } else if (&quot;3&quot;.equals(value)) { funStory(); } } } final public void setSequence(List&lt;String&gt; sequence){ this.sequence = sequence; } } //某一种类型的电影 public class MoveKF extends Move { @Override protected void insertPreStory() { System.out.println(&quot;KF式旁白&quot;); } @Override protected void insertKillPeople() { System.out.println(&quot;KF式杀人&quot;); } @Override protected void funStory() { System.out.println(&quot;KF式fun&quot;); } @Override protected void fightEveryOne() { System.out.println(&quot;KF式fight&quot;); } } //建造者抽像 public abstract class MoveBuilder { public abstract void setSequence(List&lt;String&gt; sequence); public abstract Move getMove(); } public class MoveKFBuilder extends MoveBuilder { private MoveKF moveKF = new MoveKF(); @Override public void setSequence(List&lt;String&gt; sequence) { moveKF.setSequence(sequence); } @Override public Move getMove() { return moveKF; } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+      <tags>
+        <tag>designPattern</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Template]]></title>
+    <url>%2F2018%2F01%2F14%2Fpattern%2F</url>
+    <content type="text"><![CDATA[设计模式之 10 模板方法模式 定义一个操作中的算法框架，将一些具体步骤延迟到子类，由子类实现。如，我们出门买东西的步骤。抽像类中有，出门 沟通 付款 拿东西 回家，这些基本方法和包含这些基本方法的模板方法。子类实现基本方法。重点在固有的顺序 public abstract class BuySthTemplate { public abstract void goToOut(); public abstract void chat(); public abstract void pay(); public abstract void gotSth(); public void buySthTem(){ this.goToOut(); this.chat(); if(needPay()){ this.pay(); } gotSth(); } protected boolean needPay(){//子类可覆写此方法，以影响固有逻辑 return true; } } public class BuySth extends BuySthTemplate { @Override public void goToOut() { System.out.println(&quot;A号人出去了&quot;); } @Override public void chat() { System.out.println(&quot;A号人在聊天&quot;); } @Override public void pay() { System.out.println(&quot;A号人付钱了&quot;); } @Override public void gotSth() { System.out.println(&quot;A号人拿到东西了&quot;); } protected boolean needPay(){ System.out.println(&quot;一系列的逻辑判断，不用付钱了&quot;); return false; } public static void main(String[] args) { BuySth buySth = new BuySth(); buySth.buySthTem(); } }]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+      <tags>
+        <tag>designPattern</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[prompt]]></title>
+    <url>%2F2018%2F01%2F14%2Fprompt%2F</url>
+    <content type="text"><![CDATA[prompt迅速的 敏捷的 提示 提示的内容 [商]付款期限 testament遗嘱 证明 consequent作为结是的，随之发生的 合乎逻辑的 结论 推论 marine life海洋生物 algal海藻的 rake梳理 扫视 花花公子 pan平底锅 严厉批评 initiative新方案 主动权 初步的 patrol巡逻 巡查 watershed流域 分水岭 转折点 slick圆滑的 油层 使光滑发亮 verdict定论 imperial皇帝 特大号的 至尊的 petty琐碎的 小规模的 substance内容 重要性 财产 robust强壮的 浓的 thrive兴旺 繁荣 ascend上升]]></content>
+      <categories>
+        <category>english</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[principle]]></title>
+    <url>%2F2018%2F01%2F02%2Fprinciple%2F</url>
+    <content type="text"><![CDATA[六大原则1. 单一职责原则 SRP 应该有且仅有一个原因引起类的变更。（模块化思想） 2. 里氏替换原则 父类出现的地方，子类就可以出现.-是否满足此原则的标尺（程序的健壮性。在实际项目中，每个子类对应不同的业务含义，可以使用父类作为参数，传递不同的子类完成不的业务逻辑）.(保持父类的方法有效，因为父类是共性的) 下面的3，4点，相同条件下，同一类对像的业务逻辑和基类一致，若不一致，基类也就失去了意义 1. 子类必须完全实现父类的方法。（父类的每一个方法，子类都应有其对应的意义） 2. 子类有自己的个性 3. 重载（参数不同，返回结果不同就是重载）或实现父类的方法时，输入的参数应被放大 4. 重载或实现父类的方法时，输出结果可以被缩小 3. 依赖倒置原则 面向接口编程。传递依赖关系有三种方式，接口传递，构造方法传递，setter方法传递，传递的参数均为抽象 (按照正常逻辑，对于接口，参数是具体的，参数变了，相应的方法也就变了，针对于方法，参数抽像后，依赖关系定位到参数上，同一方法可满足不同要求，相对于以前调整或新增方法来说称为倒置) 接口传递： public void play(IToy toy){}//优于参数为gun 或者car class gun implements IToy {} class car implements IToy {} 构造方法,setter传递就是，对应的方法参数类型为IToy 4. 接口隔离原则 要求接口功能具有单一性，只扮演一名角色，需要高内聚。对于实现类来说，接口提供的方法都是必须的。依据经验，有效控制接口粒度,即接口方法尽量少一些 5. 迪米特原则 接口内不要出现陌生类，即变量都是类成员变量或，参数 接口的公共方法能少尽量少， 6. 开闭原则 对扩展开放，对修改关闭。即不要通过修改已有的代码来实现变化]]></content>
+      <categories>
+        <category>编程的艺术</category>
+        <category>designPattern</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[narrative]]></title>
+    <url>%2F2017%2F12%2F17%2Fnarrative%2F</url>
+    <content type="text"><![CDATA[narrative 叙述的 故事 dignity 尊严 高贵 端庄 adversary 敌手 对手 plague 烦扰 造成麻烦 瘟疫 transient 短暂的 瞬间变化 overhead 普通费用 在高处 amend 自我修正 改善 bland 乏味的 温和的 丧失特性的 reciprocal 互补的 conclude 作出决定 edible 食品 可食用的]]></content>
+      <categories>
+        <category>english</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[contaminated]]></title>
+    <url>%2F2017%2F12%2F14%2Fcontaminated%2F</url>
+    <content type="text"><![CDATA[contaminated 受污染的 stem from 来自于 vexed 生气的 ransomware 勒索软件 humiliating 丢脸的 revenue 税收 税务局 console 安慰 tremendous 巨大的 极好的 renegotiate重新谈判 subsidence 下沉 souvenir 纪念品 supremacist 至上主义者 trivial 琐碎的 不重要的 novelty 新奇 小装饰 wrapped up 专心致志的 eloquent 雄辩的 动人的 lever 杠杆 gloom 黑暗 忧郁 slaughter 残杀]]></content>
+      <categories>
+        <category>english</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[markdown]]></title>
+    <url>%2F2017%2F12%2F14%2Fmarkdown%2Fmarkdown%2F</url>
+    <content type="text"><![CDATA[代码块换行 比上一行缩进两个tab位置 三个`但是，markdownpad2 预览不行 此换行， 是用&lt;pre> &lt;/pre> 三个` sss 预览换行，需要设置makrdown处理器 sss sss 转义(此显示是用两个缩进) 空格 &amp;nbsp; &lt; 小于号 &amp;lt; &gt; 大于号 &amp;gt; &amp; 与号 &amp;amp; “ 引号 &amp;quot; ‘ 撇号 &amp;apos;]]></content>
+      <categories>
+        <category>工具</category>
+        <category>markdown</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[humiliate]]></title>
+    <url>%2F2017%2F12%2F13%2Fhumiliate%2F</url>
+    <content type="text"><![CDATA[humiliate 使。。。丢脸 browser 吃嫩页的动物 浏览书本的人 elevation 海拔 提高 aesthetic 有美感的 bust 破产 打碎 半身像 prefecture 任期 管区 县 diesel 柴油机 snoop 窥探者 打听 thicken 变为复杂 变浓 soar 高扬 高耸 滑翔 prosecution 经营 起诉 sultry 闷热的 迷人的 debris 碎片 confiscate 没收 real estate 房地产 不动产 denigrate 诋毁 cull 剔除 采摘（花） provision 条款 食物 向。。。供应食物 arrogant 自大的 scrape 刮掉 reckless 大意的]]></content>
+      <categories>
+        <category>english</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[intriguing]]></title>
+    <url>%2F2017%2F12%2F12%2Fintriguing%2F</url>
+    <content type="text"><![CDATA[intriguing 吸引人的 有趣的 私通 密谋 predator 食肉动物 掠夺者 dorsal 背部的 intersection 交集 十字路口 rhinoceros (对受攻击，批评等）麻木不仁 dental 牙齿的 camouflage 伪装 迷彩服 rival 对手 竟争 tame 驯服的 乏味的 ventral 腹部的 refrain 重复 节制 mild 文雅的 （烟，酒)味淡的 ivory 象牙 乳白色的 degrade 退化 降级 reconciliation 调和 expense 消费 支出 empirical 经验主义的 courtesy 礼貌 好意 coupon 订货单 优惠券 dismay 沮丧 使灰心 extinct 灭绝的 modest 端庄的 适度的 谦虚的 council 委员会 literal 字面的 文字的 gross 总量 严重的 令人不快的 obsession 痴迷的 困扰 idiom 成语 风格 feasible 可行的 boom 繁荣 急速增长]]></content>
+      <categories>
+        <category>english</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[bode]]></title>
+    <url>%2F2017%2F12%2F11%2Fbode%2F</url>
+    <content type="text"><![CDATA[bode 预示 pesticide 杀虫剂 dedicated 专用的 safari 旅行 quack 庸医 骗子 constellation 星座 星群 recession 后退 不景气 specimen 样本 predecessor 前辈 原有事物 casualty 变故 伤忘人数 indict 指控 控告 colleague 同事 mutual 共同的 相互的 consecutive 连续的 连贯的 purity 纯正 纯粹 turbulent 骚乱的 prune 李子干 砍掉 删除 robust 强壮的 浓的 verdict 定论]]></content>
+      <categories>
+        <category>english</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[sparl]]></title>
+    <url>%2F2017%2F12%2F10%2Fspar%2F</url>
+    <content type="text"><![CDATA[spar 金属柱 拳击，争吵 rebuke 指责 ferry 渡口 运输 thrive 兴旺，繁荣 supervise 监督，管理，指导 stall 货摊 发生障碍 dorm (集体）宿舍 lorry 卡车，货运汽车 lash 鞭子 抽打 petty 小气的 琐碎的 conventional 普通的，常规的 exceed 领先 signify 表明，预示 rim 边，框 镶边 fidelity 忠诚，准确性 renounce 放弃，否认]]></content>
+      <categories>
+        <category>english</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[openApp]]></title>
+    <url>%2F2017%2F05%2F07%2Fgit%2FopenApp%2F</url>
+    <content type="text"><![CDATA[概术通过git bash命令行，打开应用如小书匠 应用打开配置1，自定义命令md. 在任意目录下新建md文件（无后缀名），并将其加到系统变量。内容如下： #!/bin/sh &quot;D:\Program Files (x86)\Story\nw.exe&quot; $1 &amp; 2 ， 通用路径配置，向git安装目录下的etc/profile文件中添加如下内容 MDPATH=&quot;E:/blog/hexo/source/_posts/&quot; 3 ，打开指定位置下的md文件 md $MDPATH/hexo/test.md]]></content>
+      <categories>
+        <category>工具</category>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>bash环境变量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[backup]]></title>
+    <url>%2F2017%2F05%2F07%2Fhexo%2Fbackup%2F</url>
+    <content type="text"><![CDATA[博客备份至github分支博客根目录执行以下命令 git init git checkout -b hexo //创建hexo分支，存放博客源码 git add . //添加文件 git commit -m &quot;博客备分&quot; git remote add origin git@github.com:fulndon/fulndon.github.io.git //添加远程仓库 git push origin hexo commit前，需要先更新分支上的代码 $ git pull origin hexo --allow-unrelated-histories git init git checkout -b hexo //创建hexo分支，存放博客源码 git add . //添加文件 git commit -m &quot;博客备分&quot; git remote add origin git@github.com:fulndon/fulndon.github.io.git //添加远程仓库 git push origin hexo]]></content>
+      <categories>
+        <category>工具</category>
+        <category>hexo</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[图片展示相关-七牛云]]></title>
+    <url>%2F2017%2F05%2F07%2Fhexo%2Fimg%2F</url>
+    <content type="text"><![CDATA[概术在windows系统下 通过git bash命令行向七牛空间上传图片 准备工作qshell安装1 下载 qshell无需安装2 将下载好的exe文件放在你想放的位置，并将其加入系统变量中（高级环境变量-path） 3 注册七牛建立存储空间,并去个人面板，个人中心创建密钥 图片上传配置1 密钥设置，打开git bash命令行，输入以下命令 qshell account 你自己的ak 你自己的sk //设置 七牛云中的ak sk qshell account //可以查看你设置的ak sk是否正确 2 博客根目录下建立img文件夹，imgup.conf分别用于存放上传的图片和配置信息（如下） { &quot;src_dir&quot; : &quot;E:\\blog\\hexo\\img&quot;, &quot;bucket&quot; : &quot;fulndon-blog&quot;, &quot;log_level&quot; : &quot;info&quot;, &quot;log_stdout&quot; : true //会将相关日志输出到控制台， } 本次配置结果：图片上传的链接是域名+图片相对于src_dir的路径 如 ： 域名/test/init.jpg表示init.jpg图片是src_dir目录下的test文件夹中 3 图片上传 于博客根目录下执行以下bash命令 2 是线程数， qshell qupload 2 imgup.conf 其他参数说明，参见详细信息qupload]]></content>
+      <categories>
+        <category>工具</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>hexo</tag>
+        <tag>qhell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用前准备]]></title>
+    <url>%2F2017%2F05%2F06%2Fhexo%2F%E4%BD%BF%E7%94%A8%E5%89%8D%E5%87%86%E5%A4%87%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo config]]></title>
+    <url>%2F2017%2F05%2F06%2Fhexo%2Fhexo%2F</url>
+    <content type="text"><![CDATA[站点配置文件1，hexo d deploy: type: git repo: git@github.com:fulndon/fulndon.github.io.git branch: master 2，hexo new test –lang dirname new_post_name: :lang/:title.md # File name of new posts 主题配置文件1，本地搜索 安装了hexo-generator-searchdb local_search: enable: true 2，头像设置 avatar avatar: http://ohbudtted.bkt.clouddn.com/think.jpg 3，阅读全文 auto_excerpt: enable: false //设成true 开启 length: 150 也可以在文章中使用如下标签 &lt;!--more--&gt; 其他基础命令 1 密钥生成 ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot; 2 分类，标签页生成hexo new page categories 3 指定多个标签 tags: - tag1 - tag2 // or tags: [tag1,tag2,tag3]]]></content>
+      <categories>
+        <category>工具</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git]]></title>
+    <url>%2F2017%2F05%2F06%2Fgit%2Fgit%2F</url>
+    <content type="text"><![CDATA[简单解绍git 是一个分布式管理控制系统，多人完成项目时，每个人的本地仓库的项目代码和服务器一样。即本地一个仓库，服务器一个仓库.Git中文教程 git 对待数据的方式对项目进行了一次变更后，git会对当前项目状态做一次快照。当然没有修改的文件，git不会重新存诸，只是建立一个索引指向原先的文件。 相关术语三种状态和三种区域提交：代码提交至本地仓库、对应于git仓库修改：、对应于工作目录暂存：相当于给代码打上标记，表示要提交到仓库中、对应于暂存区域，该区域是一个文件保存了，下次提交时的文件列表信息。 git ignore 所有空行或者以 ＃ 开头的行都会被 Git 忽略 可以使用标准的 glob 模式匹配 匹配模式可以以（/）开头防止递归 以（/ )结尾，指定目录 模式前加！，表示指定相反文件 所谓的 glob 模式是指 shell 所使用的简化了的正则表达式 使用两个星号（*) 表示匹配任意中间目录，比如`a/**/z` 可以匹配 a/z, a/b/z 或 `a/b/c/z`等 命令init设置身份标识//去掉 --global，表示只针对当前用户 $ git config --global user.name &quot;John Doe&quot; $ git config --global user.email johndoe@example.com Git配置多ssh密钥这里 设置文本编辑器emacs$ git config --global core.editor emacs 比较内容差异暂存前，看看文件改动了什么，可以使用git diff 命令git diff –cached 查看已经暂存起来的变化git log -p -2 -p，用来显示每次提交的内容差异。 你也可以加上 -2 来仅显示最近两次提交git log –pretty=onelinegit log –pretty=format:”%h - %an, %ar : %s” Administrator@fulndon MINGW64 /h/blog/hexo (hexo) $ git log --pretty=oneline d0f7caea2373e7ee2dcf592a39dbcaee7b2cf86c git 自定义命令 10299cbba62197d3e133cc3ea83595be92498649 love page 5ac558b6574c58a183442ee6cfa0c37efb8b949b qshell upload $ git log --pretty=format:&quot;%h - %an, %ar : %s&quot; d0f7cae - fulndon, 7 days ago : git 自定义命令 10299cb - fulndon, 7 days ago : love page git打标签用来表示某次提交有特定的含义。标签不能重复，一般用来表示版本 git push origin &lt;tag name&gt; // 推送一个标签到远程 git push origin hexo --tags //推送所有未推送的标签 git tag -a deploy_v1 4e9fcd4f6f -m &#39;创建标签 -a后跟的是标签名 logid&#39;//某一个提交加标签 git tag &lt;name&gt;//就可以打一个新标签 git tag //展示标签 git tag -d &lt;tag name&gt; // 删除一个标签 git push origin :refs/tags/&lt;tag name&gt; // 本地tag删除了，在执行该句，删除远程tag]]></content>
+      <categories>
+        <category>工具</category>
+        <category>git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[thread]]></title>
+    <url>%2F2017%2F05%2F06%2Fthread%2F</url>
+    <content type="text"></content>
+  </entry>
+</search>
