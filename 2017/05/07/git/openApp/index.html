@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>openApp | Everything will be ok</title>
+  <meta name="keywords" content=" git , bash环境变量 ">
+  <meta name="description" content="openApp | Everything will be ok">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="java工程师 前端语言 python scala  中间件 kafka elk  布署运维 maven gradle  源码java基础开源框架书 解忧杂货店 设计模式">
+<meta property="og:type" content="website">
+<meta property="og:title" content="简介">
+<meta property="og:url" content="https://usknow.top/about/index.html">
+<meta property="og:site_name" content="Everything will be ok">
+<meta property="og:description" content="java工程师 前端语言 python scala  中间件 kafka elk  布署运维 maven gradle  源码java基础开源框架书 解忧杂货店 设计模式">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-10-28T14:35:03.339Z">
+<meta property="article:modified_time" content="2021-10-28T14:35:03.339Z">
+<meta property="article:author" content="eagles">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="https://fulndon.gitee.io/hexo/images/think.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="https://fulndon.gitee.io/hexo/images/think.jpg" />
+</a>
+<div class="author">
+    <span>eagles</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(36)</small></div></li>
+    
+        
+            
+            <li><div data-rel="english">english<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据"><i class="fold iconfont icon-right"></i>数据<small>(4)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="ELK"><i class="fold iconfont icon-right"></i>ELK<small>(3)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="notices">notices<small>(3)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="hbase">hbase<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="编程的艺术"><i class="fold iconfont icon-right"></i>编程的艺术<small>(12)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="designPattern">designPattern<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="artCoding">artCoding<small>(2)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="工具"><i class="fold iconfont icon-right"></i>工具<small>(11)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="git">git<small>(5)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="markdown">markdown<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="hexo">hexo<small>(5)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a style="border-right: 1px solid #fff; width: 49%"  class="about site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="36">
+<input type="hidden" id="yelog_site_word_count" value="10.6k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+            <li><a target="_blank" href="http://wiliam.me/">william</a></li>
+            
+            <li><a target="_blank" href="https://ehlxr.me/">ehlxr</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">designPattern</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">design</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color4">bash环境变量</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">qhell</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="english "
+           href="/2017/12/11/bode/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="bode">bode</span>
+            <span class="post-date" title="2017-12-11 23:05:48">2017/12/11</span>
+        </a>
+        
+        <a  class="english "
+           href="/2017/12/14/contaminated/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="contaminated">contaminated</span>
+            <span class="post-date" title="2017-12-14 22:54:35">2017/12/14</span>
+        </a>
+        
+        <a  class="english "
+           href="/2017/12/12/intriguing/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="intriguing">intriguing</span>
+            <span class="post-date" title="2017-12-12 23:30:53">2017/12/12</span>
+        </a>
+        
+        <a  class="english "
+           href="/2017/12/13/humiliate/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="humiliate">humiliate</span>
+            <span class="post-date" title="2017-12-13 23:22:30">2017/12/13</span>
+        </a>
+        
+        <a  class="english "
+           href="/2017/12/17/narrative/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="narrative">narrative</span>
+            <span class="post-date" title="2017-12-17 21:36:24">2017/12/17</span>
+        </a>
+        
+        <a  class="english "
+           href="/2018/01/14/prompt/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="prompt">prompt</span>
+            <span class="post-date" title="2018-01-14 08:44:06">2018/01/14</span>
+        </a>
+        
+        <a  class="english "
+           href="/2017/12/10/spar/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="sparl">sparl</span>
+            <span class="post-date" title="2017-12-10 22:40:27">2017/12/10</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/05/09/chainPattern/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="chainPattern">chainPattern</span>
+            <span class="post-date" title="2018-05-09 22:43:45">2018/05/09</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/04/11/builderPattern/"
+           data-tag="designPattern"
+           data-author="" >
+            <span class="post-title" title="builderPattern">builderPattern</span>
+            <span class="post-date" title="2018-04-11 22:32:14">2018/04/11</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/05/11/decoratorPattern/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="decoratorPattern">decoratorPattern</span>
+            <span class="post-date" title="2018-05-11 22:01:25">2018/05/11</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/01/02/principle/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="principle">principle</span>
+            <span class="post-date" title="2018-01-02 21:30:27">2018/01/02</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/05/15/extends/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="extends">extends</span>
+            <span class="post-date" title="2018-05-15 07:36:49">2018/05/15</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/01/14/pattern/"
+           data-tag="designPattern"
+           data-author="" >
+            <span class="post-title" title="Template">Template</span>
+            <span class="post-date" title="2018-01-14 10:05:42">2018/01/14</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/05/06/prototypePattern/"
+           data-tag="designPattern"
+           data-author="" >
+            <span class="post-title" title="prototypePattern">prototypePattern</span>
+            <span class="post-date" title="2018-05-06 11:20:52">2018/05/06</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/05/05/proxyPattern/"
+           data-tag="designPattern"
+           data-author="" >
+            <span class="post-title" title="proxyPattern">proxyPattern</span>
+            <span class="post-date" title="2018-05-05 17:39:06">2018/05/05</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/05/07/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="命令模式">命令模式</span>
+            <span class="post-date" title="2018-05-07 23:51:03">2018/05/07</span>
+        </a>
+        
+        <a  class="编程的艺术 designPattern "
+           href="/2018/05/14/strategyPattern/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="strategyPattern">strategyPattern</span>
+            <span class="post-date" title="2018-05-14 07:46:42">2018/05/14</span>
+        </a>
+        
+        <a  class=""
+           href="/2017/05/06/thread/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="thread">thread</span>
+            <span class="post-date" title="2017-05-06 16:48:50">2017/05/06</span>
+        </a>
+        
+        <a  class="编程的艺术 artCoding "
+           href="/2019/08/02/exception-process/"
+           data-tag="design"
+           data-author="" >
+            <span class="post-title" title="exception_process">exception_process</span>
+            <span class="post-date" title="2019-08-02 20:58:02">2019/08/02</span>
+        </a>
+        
+        <a id="top" class="编程的艺术 artCoding "
+           href="/2018/05/12/artCoding/"
+           data-tag="design"
+           data-author="" >
+            <span class="post-title" title="artCoding">artCoding</span>
+            <span class="post-date" title="2018-05-12 08:45:24">2018/05/12</span>
+        </a>
+        
+        <a  class="工具 git "
+           href="/2019/12/14/git/branch-git/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="分支管理">分支管理</span>
+            <span class="post-date" title="2019-12-14 16:00:36">2019/12/14</span>
+        </a>
+        
+        <a  class="数据 hbase "
+           href="/2019/08/10/hbase/hbase-init/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="hbase初识">hbase初识</span>
+            <span class="post-date" title="2019-08-10 11:51:21">2019/08/10</span>
+        </a>
+        
+        <a  class="工具 git "
+           href="/2019/08/04/git/commands/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git常用命令">git常用命令</span>
+            <span class="post-date" title="2019-08-04 11:19:48">2019/08/04</span>
+        </a>
+        
+        <a  class="工具 git "
+           href="/2017/05/06/git/git/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git">git</span>
+            <span class="post-date" title="2017-05-06 18:00:35">2017/05/06</span>
+        </a>
+        
+        <a  class="工具 markdown "
+           href="/2017/12/14/markdown/markdown/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="markdown">markdown</span>
+            <span class="post-date" title="2017-12-14 07:40:05">2017/12/14</span>
+        </a>
+        
+        <a  class="工具 git "
+           href="/2017/05/07/git/openApp/"
+           data-tag="git,bash环境变量"
+           data-author="" >
+            <span class="post-title" title="openApp">openApp</span>
+            <span class="post-date" title="2017-05-07 18:45:06">2017/05/07</span>
+        </a>
+        
+        <a  class="工具 hexo "
+           href="/2017/05/06/hexo/hexo/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="hexo config">hexo config</span>
+            <span class="post-date" title="2017-05-06 18:01:03">2017/05/06</span>
+        </a>
+        
+        <a  class="工具 hexo "
+           href="/2017/05/07/hexo/backup/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="backup">backup</span>
+            <span class="post-date" title="2017-05-07 15:43:20">2017/05/07</span>
+        </a>
+        
+        <a  class="工具 git "
+           href="/2019/12/14/git/store-git/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git存储原理">git存储原理</span>
+            <span class="post-date" title="2019-12-14 14:03:16">2019/12/14</span>
+        </a>
+        
+        <a  class="工具 hexo "
+           href="/2017/05/07/hexo/img/"
+           data-tag="git,hexo,qhell"
+           data-author="" >
+            <span class="post-title" title="图片展示相关-七牛云">图片展示相关-七牛云</span>
+            <span class="post-date" title="2017-05-07 14:00:25">2017/05/07</span>
+        </a>
+        
+        <a  class="工具 hexo "
+           href="/2019/08/04/hexo/daocloud/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="自动化布署">自动化布署</span>
+            <span class="post-date" title="2019-08-04 14:00:20">2019/08/04</span>
+        </a>
+        
+        <a  class="工具 hexo "
+           href="/2018/07/17/hexo/romance/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="romance">romance</span>
+            <span class="post-date" title="2018-07-17 17:08:50">2018/07/17</span>
+        </a>
+        
+        <a  class=""
+           href="/2017/05/06/hexo/%E4%BD%BF%E7%94%A8%E5%89%8D%E5%87%86%E5%A4%87/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="使用前准备">使用前准备</span>
+            <span class="post-date" title="2017-05-06 20:18:07">2017/05/06</span>
+        </a>
+        
+        <a  class="数据 ELK notices "
+           href="/2019/12/10/elk/notices/client-notices/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="client-notices">client-notices</span>
+            <span class="post-date" title="2019-12-10 16:15:43">2019/12/10</span>
+        </a>
+        
+        <a  class="数据 ELK notices "
+           href="/2019/12/12/elk/notices/cluster-notices/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="cluster-notices">cluster-notices</span>
+            <span class="post-date" title="2019-12-12 11:13:52">2019/12/12</span>
+        </a>
+        
+        <a  class="数据 ELK notices "
+           href="/2019/12/06/elk/notices/mapping-notices/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="mapping-notices">mapping-notices</span>
+            <span class="post-date" title="2019-12-06 18:00:49">2019/12/06</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-git/openApp" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">openApp</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="工具">工具</a>/
+            
+                <a href="javascript:" data-rel="git">git</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color4">git</a>
+            
+            <a href="javascript:" class="color4">bash环境变量</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2021-10-28 22:35:03'>2017-05-07 18:45</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:121</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E6%9C%AF"><span class="toc-text">概术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E6%89%93%E5%BC%80%E9%85%8D%E7%BD%AE"><span class="toc-text">应用打开配置</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-2 i,
+    .toc-level-2 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概术"><a href="#概术" class="headerlink" title="概术"></a>概术</h1><p>通过git bash命令行，打开应用如小书匠</p>
+<span id="more"></span>
+<h1 id="应用打开配置"><a href="#应用打开配置" class="headerlink" title="应用打开配置"></a>应用打开配置</h1><p>1，自定义命令<strong>md</strong>.  在任意目录下新建md文件（<span style="color:red">无后缀名</span>），并将其加到系统变量。内容如下：</p>
+<pre><code class="bash?linenums">#!/bin/sh
+&quot;D:\Program Files (x86)\Story\nw.exe&quot; $1 &amp;</code></pre>
+<p>2 ， 通用路径配置，向git安装目录下的<code>etc/profile</code>文件中添加如下内容</p>
+<pre><code class="bash">MDPATH=&quot;E:/blog/hexo/source/_posts/&quot;</code></pre>
+<p>3 ，打开指定位置下的md文件</p>
+<pre><code class="bash">md $MDPATH/hexo/test.md</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 fulndon@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>openApp</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">121</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="eagles">eagles</a></p>
+    <p><span class="copy-title">发布时间:</span>2017-05-07, 18:45:06</p>
+    <p><span class="copy-title">最后更新:</span>2021-10-28, 22:35:03</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2017/05/07/git/openApp/" title="openApp">https://usknow.top/2017/05/07/git/openApp/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'a7bc32199d61012a9bd8',
+            clientSecret: '17bc410e5752fa56a5f572f2108eaa838780439e',
+            repo: 'fulndon.github.io',
+            owner: 'fulndon',
+            admin: ['fulndon'],
+            id: location.pathname,
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2017 eagles</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc open"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['@阿杰','@小马哥','#designPattern','#design','#git','#bash环境变量','#hexo','#qhell',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+    .post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>
