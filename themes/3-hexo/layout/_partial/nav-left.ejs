@@ -28,15 +28,26 @@
 <%
 if (theme.category && theme.category.sub) {
     var childCategory = {};
-    site.categories.forEach(function (category) {
+     var changeIndex=0;
+    site.categories.forEach(function (category,i) {
         if (category.parent) {
             if (childCategory[category.parent]) {
                 childCategory[category.parent].push(category);
             } else {
                 childCategory[category.parent] = [category];
             }
-        }
-    })
+
+        }else if(category.name=='她'){
+	    changeIndex = i;
+	}
+    });
+    
+    if(changeIndex != 0){
+	var temp = site.categories.data[changeIndex];
+	site.categories.data[changeIndex] = site.categories.data[0];
+	site.categories.data[0] = temp;
+    }
+
 }
 
 %>
