@@ -1,7 +1,7 @@
 ---
 title: artCoding
 categories: 
-- 编程的艺术
+- 艺术
 - artCoding
 domainimg: ohbudtted.bkt.clouddn.com
 lang: codingGuideline

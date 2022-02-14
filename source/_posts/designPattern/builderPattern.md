@@ -5,7 +5,7 @@ lang: designPattern
 date: 2018-04-11 22:32:14
 tags: designPattern
 categories: 
-- 编程的艺术
+- 艺术
 - designPattern
 ---
 设计模式之11 建造者模式

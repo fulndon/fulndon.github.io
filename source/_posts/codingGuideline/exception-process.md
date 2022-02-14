@@ -3,7 +3,7 @@ layout: exception_process
 title: exception_process
 lang: codingGuideline
 categories: 
-- 编程的艺术
+- 艺术
 - artCoding
 date: 2019-08-02 20:58:02
 tags: design
