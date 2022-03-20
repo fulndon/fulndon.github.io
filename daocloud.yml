@@ -22,6 +22,7 @@ stages:
   - eval $(ssh-agent)
   - ssh-add ~/.ssh/id_rsa
   - rm -rf .daocloud
+  - git config --global http.sslVerify "false"
   - git config --global user.name "fulndon"
   - git config --global user.email "1021131482@qq.com"
   image: daocloud.io/fulndon/wolf:latest
