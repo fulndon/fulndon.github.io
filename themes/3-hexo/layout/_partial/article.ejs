@@ -87,11 +87,11 @@
       <% } else { %>
         <%- post.content %>
       <% } %>
-       <% if(theme.article_txt){%><hr><span style="font-style: italic;color: gray;"> <%=theme.article_txt%> </span><%}%>
+       <% if(theme.article_txt && !page.no_reward){%><hr><span style="font-style: italic;color: gray;"> <%=theme.article_txt%> </span><%}%>
     </div>
 </article>
 
-<% if(theme.reward){%>
+<% if(theme.reward && !page.no_reward){%>
 <p>
     <a  class="dashang" onclick="dashangToggle()"><%= __('donation.button') %></a>
 </p>

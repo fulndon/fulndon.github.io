@@ -3,7 +3,6 @@ title: artCoding
 categories: 
 - 艺术
 - artCoding
-domainimg: ohbudtted.bkt.clouddn.com
 lang: codingGuideline
 date: 2018-05-12 08:45:24
 top: 1
